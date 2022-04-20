@@ -1,4 +1,4 @@
-import { FaCopyright } from 'react-icons/fa'
+import { SiNodedotjs } from 'react-icons/si'
 
 const Footer = () => {
   const footerYear = new Date().getFullYear()
@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="footer p-10 bg-gray-700
     text-primary-content footer-center">
       <div>
-        <FaCopyright className='text-2xl'/>
+        <SiNodedotjs className='text-2xl'/>
         <p>Copyright &copy; {footerYear} All right reserved</p>
       </div>
     </footer>
