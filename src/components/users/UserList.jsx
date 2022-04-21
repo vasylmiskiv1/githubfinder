@@ -7,11 +7,10 @@ import GithubContext from "../../context/github/GithubContext"
 
 
 export default function UserList() {
-  const {users, loader, fetchUsers} = useContext(GithubContext)
+  const { users, loader, fetchUsers } = useContext(GithubContext)
 
   useEffect(() => {
     fetchUsers()
-    console.log(process.env.REACT_APP_GITHUB_TOKEN)
   }, [fetchUsers])
 
 
