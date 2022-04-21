@@ -1,11 +1,9 @@
-import React from 'react'
+import UserList from "../components/users/UserList"
 
 export default function Home() {
   return (
-    <div>
-      <h1 className="text-6xl">
-        Welcome
-      </h1>
-    </div>
+    <>
+      <UserList />
+    </>
   )
 }
