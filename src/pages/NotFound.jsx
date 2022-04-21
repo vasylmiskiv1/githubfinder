@@ -7,7 +7,8 @@ export default function NotFound() {
       <div className="text-center hero-content">
         <div className="max-w-lg">
           <FaTimesCircle className='text-6xl hero mb-5'/>
-          <h1 className="text-3xl font-bold mb-8 mb-20">
+          <h2 className="text-5xl font-bold mb-2">404</h2>
+          <h1 className="text-3xl font-bold mb-20">
             Page not found
           </h1>
          

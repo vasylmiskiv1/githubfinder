@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import Loader from "../layout/Loader"
+import UserItem from "./UserItem"
 
 export default function UserList() {
   const [users, setUsers] = useState([])
@@ -6,14 +8,13 @@ export default function UserList() {
 
   useEffect(() => {
     fetchUsers()
-    
   }, [])
 
   const fetchUsers = async () => {
     const res = await fetch(
       `${process.env.REACT_APP_GITHUB_URL}/users`, {
       headers: {
-        Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN }`,
+        Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
       } 
     })
 
@@ -26,13 +27,13 @@ export default function UserList() {
     return (
       <div className="grid grid-cols-1 gap-12 xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2">
         {users.map((user) => (
-          <h3 key={user.id}>{user.login}</h3>
+         <UserItem key={user.id} user={user}/>
         ))}
       </div>
     )
   } else {
     return (
-      <h3>Loading...</h3>
+      <Loader />
     )
   }
 }
