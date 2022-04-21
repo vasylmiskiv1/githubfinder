@@ -1,27 +1,19 @@
-import { useEffect, useState } from "react"
+import { useEffect, useContext } from "react"
 import Loader from "../layout/Loader"
 import UserItem from "./UserItem"
 
+// state
+import GithubContext from "../../context/github/GithubContext"
+
+
 export default function UserList() {
-  const [users, setUsers] = useState([])
-  const [loader, setLoader] = useState(true)
+  const {users, loader, fetchUsers} = useContext(GithubContext)
 
   useEffect(() => {
     fetchUsers()
-  }, [])
+    console.log(process.env.REACT_APP_GITHUB_TOKEN)
+  }, [fetchUsers])
 
-  const fetchUsers = async () => {
-    const res = await fetch(
-      `${process.env.REACT_APP_GITHUB_URL}/users`, {
-      headers: {
-        Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
-      } 
-    })
-
-    const data = await res.json()
-    setUsers(data)
-    setLoader(false)
-  }
 
   if(!loader) {
     return (
