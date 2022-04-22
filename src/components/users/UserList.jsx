@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react"
+import { useContext } from "react"
 import Loader from "../layout/Loader"
 import UserItem from "./UserItem"
 
@@ -7,11 +7,7 @@ import GithubContext from "../../context/github/GithubContext"
 
 
 export default function UserList() {
-  const { users, loader, fetchUsers } = useContext(GithubContext)
-
-  useEffect(() => {
-    fetchUsers()
-  }, [fetchUsers])
+  const { users, loader } = useContext(GithubContext)
 
 
   if(!loader) {
