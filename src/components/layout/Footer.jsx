@@ -1,4 +1,3 @@
-import { SiReact } from 'react-icons/si'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun } from '@fortawesome/fontawesome-free-solid'
 

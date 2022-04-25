@@ -2,13 +2,15 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // layouts
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
-// paes
+// pages
 import Home from "./pages/Home";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import { GithubProvider } from './context/github/GithubContext.js'
 
 import { AlertProvider } from './context/alert/AlertContext'
+
+import Alert from "./components/layout/Alert";
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
             <Navbar />
 
             <main className="container mx-auto px-3 pb-12">
+              <Alert/>
               <Routes>
                 <Route path="/" element={<Home  />}/>
                 <Route path="/about" element={<About />}/>
