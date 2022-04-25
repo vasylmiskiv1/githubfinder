@@ -17,6 +17,11 @@ export const GithubProvider = ({ children }) => {
 
   const { users, user, loader } = state;
 
+    // Set loader
+    const setLoader = () => dispatch({
+      type: 'SET_LOADER'
+    })
+
   // Get search results
   const searchUsers = async (text) => {
     setLoader()
@@ -40,11 +45,6 @@ export const GithubProvider = ({ children }) => {
       payload: items,
     })
   }
-
-  // Set loader
-  const setLoader = () => dispatch({
-    type: 'SET_LOADER'
-  })
 
   // gett single user
   const getUser = async (login) => {
