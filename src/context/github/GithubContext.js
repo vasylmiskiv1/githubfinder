@@ -23,6 +23,12 @@ export const GithubProvider = ({ children }) => {
       type: 'SET_LOADER'
     })
 
+    // off loader
+    const offLoader = () => dispatch({
+      type: 'OFF_LOADER',
+      payload: false,
+    })
+
   // Get search results
   const searchUsers = async (text) => {
     setLoader()
@@ -112,6 +118,7 @@ export const GithubProvider = ({ children }) => {
     clearList,
     getUser,
     getUserRepos,
+    offLoader,
   }}>
     { children }
     </GithubContext.Provider>
