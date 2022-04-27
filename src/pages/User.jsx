@@ -3,17 +3,25 @@ import {FaCodepen, FaStore, FaUserFriends, FaUsers} from 'react-icons/fa'
 import { useEffect, useContext, useReducer } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import Loader from '../components/layout/Loader'
+import RepoList from '../components/repos/RepoList'
 import GithubContext from '../context/github/GithubContext'
 
 
 export default function User() {
 
-  const { getUser, user, loader } = useContext(GithubContext)
+  const { 
+    getUser,
+    user,
+    loader, 
+    getUserRepos,
+    repos
+   } = useContext(GithubContext)
 
   const params = useParams()
-
+  
   useEffect(() => {
     getUser(params.login)
+    getUserRepos(params.login)
   }, [])
 
   const {
@@ -33,12 +41,13 @@ export default function User() {
     hireable,
   } = user
 
-  console.log(user)
+
+  
   return (
     <>
       <div className="w-full mx-auto lg:w-10/12">
         <div className="mb-4">
-          <Link to="/" className="btn btn-ghost">
+          <Link to = '/' className="btn btn-accent">
             Back To Search
           </Link>
         </div>
@@ -156,7 +165,7 @@ export default function User() {
               <FaCodepen className='text-3xl md:text-5xl'/>
             </div>
             <div className="stat-title pr-5">
-              Pulic Repos
+              Public Repos
             </div>
             <div className="stat-value pr-5 text-3xl md:text-4xl">
               {public_repos}
@@ -168,13 +177,14 @@ export default function User() {
               <FaStore className='text-3xl md:text-5xl'/>
             </div>
             <div className="stat-title pr-5">
-             Pulic Gists
+             Public Gists
             </div>
             <div className="stat-value pr-5 text-3xl md:text-4xl">
               {public_gists}
             </div>
           </div>
         </div>
+        <RepoList repos={ repos }/>
       </div>
     </>
   )
