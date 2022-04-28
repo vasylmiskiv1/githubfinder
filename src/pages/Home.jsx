@@ -1,5 +1,5 @@
-import UserList from "../components/users/UserList"
-import UserSearch from "../components/users/UserSearch"
+import UserList from "../components/users/UserList";
+import UserSearch from "../components/users/UserSearch";
 
 export default function Home() {
   return (
@@ -7,5 +7,5 @@ export default function Home() {
       <UserSearch />
       <UserList />
     </>
-  )
+  );
 }

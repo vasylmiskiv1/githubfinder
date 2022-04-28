@@ -1,59 +1,61 @@
-import { useState, useContext, useEffect } from "react"
-import GithubContext from "../../context/github/GithubContext"
-import AlertContext from "../../context/alert/AlertContext"
-import { searchUsers } from "../../context/github/GithubActions"
+import { useState, useContext, useEffect } from "react";
+import GithubContext from "../../context/github/GithubContext";
+import AlertContext from "../../context/alert/AlertContext";
+import { searchUsers } from "../../context/github/GithubActions";
 
 export default function UserSearch() {
-  const [text, setText] = useState('')
+  const [text, setText] = useState("");
 
-  const { users, dispatch } = useContext(GithubContext)
+  const { users, dispatch } = useContext(GithubContext);
 
-  const { setAlert } = useContext(AlertContext)
+  const { setAlert } = useContext(AlertContext);
 
   useEffect(() => {
-    dispatch({type:'LOADER_OFF', payload: false})
-  }, [])
+    dispatch({ type: "LOADER_OFF", payload: false });
+  }, []);
 
   const handleChange = (e) => {
-    setText(e.target.value)
-  }
+    setText(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if(text === '') {
-      setAlert('You should enter some text', 'error')
+    if (text === "") {
+      setAlert("You should enter some text", "error");
     } else {
-      dispatch({type: 'LOADER_ON'})
-      const users = await searchUsers(text)
-      dispatch({type: 'GET_USERS', payload: users})
-      setText('')
+      dispatch({ type: "LOADER_ON" });
+      const users = await searchUsers(text);
+      dispatch({ type: "GET_USERS", payload: users });
+      setText("");
     }
-  }
-  
+  };
+
   const clearTarget = () => {
-    if(text.length) {
-      setText('')
+    if (text.length) {
+      setText("");
     } else {
-      dispatch({type: 'DELETE_USERS'})
+      dispatch({ type: "DELETE_USERS" });
     }
-  }
+  };
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-2
-    lg:grid-cols-2 md:grid-cols-1 mb-8 gap-8">
+    <div
+      className="grid grid-cols-1 xl:grid-cols-2
+    lg:grid-cols-2 md:grid-cols-1 mb-8 gap-8"
+    >
       <div>
         <form onSubmit={handleSubmit}>
           <div className="form-control">
             <div className="relative">
-              <input 
-                type="text" 
+              <input
+                type="text"
                 className="
                   w-full pr-40 bg-gray-200 
                   input input-lg text-black"
-                  placeholder="Search"
-                  value={text}
-                  onChange={handleChange}
+                placeholder="Search"
+                value={text}
+                onChange={handleChange}
               />
               <button
                 type="submit"
@@ -68,15 +70,15 @@ export default function UserSearch() {
         </form>
       </div>
       {text.length || users.length ? (
-              <div>
-              <button 
-                className="btn btn-ghost btn-lg"
-                onClick={() => clearTarget()}
-                >
-                Clear
-              </button>
-            </div>
-      ): null}
-    </div> 
-  )
+        <div>
+          <button
+            className="btn btn-ghost btn-lg"
+            onClick={() => clearTarget()}
+          >
+            Clear
+          </button>
+        </div>
+      ) : null}
+    </div>
+  );
 }

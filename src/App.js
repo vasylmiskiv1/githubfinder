@@ -1,15 +1,15 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// layouts
+
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
-// pages
+
 import Home from "./pages/Home";
 import About from "./pages/About";
-import User  from "./pages/User"
+import User from "./pages/User";
 import NotFound from "./pages/NotFound";
-import { GithubProvider } from './context/github/GithubContext.js'
+import { GithubProvider } from "./context/github/GithubContext.js";
 
-import { AlertProvider } from './context/alert/AlertContext'
+import { AlertProvider } from "./context/alert/AlertContext";
 
 import Alert from "./components/layout/Alert";
 
@@ -20,15 +20,14 @@ function App() {
         <Router>
           <div className="flex flex-col justify-between h-screen">
             <Navbar />
-
             <main className="container mx-auto px-3 pb-12">
-              <Alert/>
+              <Alert />
               <Routes>
-                <Route path="/" element={<Home  />}/>
-                <Route path="/about" element={<About />}/>
-                <Route path="/user/:login" element={<User />}/>
-                <Route path="/" element={<NotFound />}/>
-                <Route path="/*" element={<NotFound />}/>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/user/:login" element={<User />} />
+                <Route path="/" element={<NotFound />} />
+                <Route path="/*" element={<NotFound />} />
               </Routes>
             </main>
             <Footer />
