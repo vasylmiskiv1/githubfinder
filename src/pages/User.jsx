@@ -1,28 +1,38 @@
 import {FaCodepen, FaStore, FaUserFriends, FaUsers} from 'react-icons/fa'
 
-import { useEffect, useContext, useReducer } from 'react'
+import { useEffect, useContext } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import Loader from '../components/layout/Loader'
 import RepoList from '../components/repos/RepoList'
 import GithubContext from '../context/github/GithubContext'
 
+import { getUser, getUserRepos } from '../context/github/GithubActions'
 
 export default function User() {
 
   const { 
-    getUser,
     user,
-    loader, 
-    getUserRepos,
-    repos
+    repos,
+    loader,
+    dispatch,
    } = useContext(GithubContext)
 
   const params = useParams()
   
   useEffect(() => {
-    getUser(params.login)
-    getUserRepos(params.login)
-  }, [])
+    // would be better use try catch 
+    dispatch({type: 'LOADER_ON'})
+    const getUserData = async () => {
+      const userData = await getUser(params.login)
+      dispatch({type: 'GET_USER', payload: userData})
+
+      const userRepoData = await getUserRepos(params.login)
+      dispatch({type: 'GET_REPOS', payload: userRepoData})
+      dispatch({type: 'LOADER_OFF'})
+    }
+
+    getUserData()
+  }, [dispatch, params.login])
 
   const {
     name,
@@ -41,8 +51,10 @@ export default function User() {
     hireable,
   } = user
 
+  if (loader) {
+    return <Loader />
+  }
 
-  
   return (
     <>
       <div className="w-full mx-auto lg:w-10/12">
@@ -61,7 +73,7 @@ export default function User() {
                 <h2 className="card-title mb-0">
                   {name}
                 </h2> 
-                <p>{login}</p> 
+                <p className='flex-grow-0'>{login}</p> 
               </div>
             </div>
           </div>

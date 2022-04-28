@@ -6,25 +6,25 @@ import { searchUsers } from "../../context/github/GithubActions"
 export default function UserSearch() {
   const [text, setText] = useState('')
 
-  const { users, dispatch, clearList, offLoader } = useContext(GithubContext)
+  const { users, dispatch} = useContext(GithubContext)
 
   const { setAlert } = useContext(AlertContext)
 
   useEffect(() => {
-    offLoader()
+    dispatch({type:'LOADER_OFF', payload: false})
   }, [])
 
   const handleChange = (e) => {
     setText(e.target.value)
   }
 
-  const handleSubmit = async  (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     if(text === '') {
       setAlert('You should enter some text', 'error')
     } else {
-      dispatch({type: 'SET_LOADING'})
+      dispatch({type: 'LOADER_ON'})
       const users = await searchUsers(text)
       dispatch({type: 'GET_USERS', payload: users})
       setText('')
@@ -35,7 +35,7 @@ export default function UserSearch() {
     if(text.length) {
       setText('')
     } else {
-      clearList(users)
+      dispatch({type: 'DELETE_USERS'})
     }
   }
 

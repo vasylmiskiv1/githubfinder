@@ -19,15 +19,15 @@ const githubReducer = (state, action) => {
         repos: action.payload,
         loading: false,
       } 
-    case 'SET_LOADER':
+    case 'LOADER_ON':
       return {
         ...state,
         loader: true,
       }
-    case 'OFF_LOADER':
+      case 'LOADER_OFF':
       return {
         ...state,
-        loader: action.payload,
+        loader: false
       }
     case 'DELETE_USERS':
       return {
