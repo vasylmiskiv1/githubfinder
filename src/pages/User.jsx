@@ -6,7 +6,8 @@ import Loader from '../components/layout/Loader'
 import RepoList from '../components/repos/RepoList'
 import GithubContext from '../context/github/GithubContext'
 
-import { getUser, getUserRepos } from '../context/github/GithubActions'
+import { getUserWithRepos } from '../context/github/GithubActions'
+
 
 export default function User() {
 
@@ -23,11 +24,10 @@ export default function User() {
     // would be better use try catch 
     dispatch({type: 'LOADER_ON'})
     const getUserData = async () => {
-      const userData = await getUser(params.login)
-      dispatch({type: 'GET_USER', payload: userData})
+      const userData = await getUserWithRepos(params.login)
+      dispatch({type: 'GET_USER_AND_REPOS', payload: userData})
 
-      const userRepoData = await getUserRepos(params.login)
-      dispatch({type: 'GET_REPOS', payload: userRepoData})
+      
       dispatch({type: 'LOADER_OFF'})
     }
 
